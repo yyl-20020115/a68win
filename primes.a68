@@ -1,0 +1,51 @@
+BEGIN # Algol-68 primes numbers, functional style   27/6/85 #
+      # L.Allison Computer Science, University of Western Australia #
+      #           Computer Science, Monash University, Australia #
+
+   PROC error = (STRING s)VOID:
+      BEGIN print(( newline, " error:", s, newline));
+            GOTO stop
+      END;
+   
+   MODE LIST = REF NODE;
+   MODE NODE = STRUCT(INT h, LIST t);
+
+   PROC cons = (INT n, LIST l)LIST:
+      HEAP NODE := (n,l);
+
+   PROC hd = (LIST l)INT:
+      IF l IS NIL THEN error(" hd nil"); SKIP  ELSE h OF l FI;
+
+   PROC tl = (LIST l)LIST:
+      IF l IS NIL THEN error(" tl nil"); SKIP  ELSE t OF l FI;
+
+   PROC show = (LIST l)VOID:
+      IF l ISNT NIL THEN print((" ",whole(hd(l),0))); show(tl(l)) FI;
+
+   PROC to = (INT n)LIST:
+      BEGIN PROC f = (INT m,n)LIST:
+	       IF m>n THEN NIL ELSE cons(m, f(m+1,n)) FI;
+	
+	    f(1,n)
+      END;
+
+   PROC filter = (PROC(INT)BOOL p, LIST l)LIST:
+      IF l IS NIL THEN NIL
+      ELIF p(hd(l)) THEN cons(hd(l), filter(p,tl(l)))
+      ELSE filter(p, tl(l))
+      FI;
+
+   PROC sieve = (LIST l)LIST:
+      IF l IS NIL THEN NIL
+      ELSE PROC notmultiple = (INT n)BOOL:
+	      n MOD (hd(l)) ~= 0;
+	   
+	   cons( hd(l), sieve( filter(notmultiple,tl(l)) ))
+      FI;
+
+   PROC primes = (INT n)LIST:
+      sieve(tl(to(n)));
+
+   show( primes(100) )
+END
+

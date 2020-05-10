@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Samples">
+      <UniqueIdentifier>{245ffeb4-ae6a-4623-a151-6a2fe9c5b3d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="a68g.c">
@@ -50,5 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="a68g-config.h.in" />
+    <None Include="primes.a68">
+      <Filter>Samples</Filter>
+    </None>
   </ItemGroup>
 </Project>

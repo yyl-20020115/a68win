@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="a68g-config.h.in" />
+    <None Include="primes.a68" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
