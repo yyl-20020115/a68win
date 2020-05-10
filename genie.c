@@ -6066,7 +6066,7 @@ heap_generator (NODE_T * p, MOID_T * mode, int size)
     FILL (POINTER (x), 0, size);
     REF_SCOPE (&z) = PRIMAL_SCOPE;
     REF_HANDLE (&z) = x;
-    ABEND (((long) ADDRESS (&z)) % A68_ALIGNMENT != 0, ERROR_ALIGNMENT, NO_TEXT);
+    ABEND (((long long) ADDRESS (&z)) % A68_ALIGNMENT != 0, ERROR_ALIGNMENT, NO_TEXT);
     heap_pointer += size;
     return (z);
   } else {

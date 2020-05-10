@@ -17144,7 +17144,7 @@ io_read (FILE_T fd, void *buf, size_t n)
     ssize_t bytes_read;
 #endif
     RESET_ERRNO;
-    bytes_read = _read (fd, z, to_do);
+    bytes_read = _read (fd, z, (unsigned int)to_do);
     if (bytes_read < 0) {
       if (errno == EINTR) {
 /* interrupt, retry */
@@ -17182,7 +17182,7 @@ io_write (FILE_T fd, const void *buf, size_t n)
   while (to_do > 0) {
     ssize_t bytes_written;
     RESET_ERRNO;
-    bytes_written = _write (fd, z, to_do);
+    bytes_written = _write (fd, z, (unsigned int)to_do);
     if (bytes_written <= 0) {
       if (errno == EINTR) {
 /* interrupt, retry */
@@ -17222,7 +17222,7 @@ io_read_conv (FILE_T fd, void *buf, size_t n)
     ssize_t bytes_read;
 #endif
     RESET_ERRNO;
-    bytes_read = _read (fd, z, to_do);
+    bytes_read = _read (fd, z, (unsigned int)to_do);
     if (bytes_read < 0) {
       if (errno == EINTR) {
 /* interrupt, retry */
@@ -17260,7 +17260,7 @@ io_write_conv (FILE_T fd, const void *buf, size_t n)
   while (to_do > 0) {
     ssize_t bytes_written;
     RESET_ERRNO;
-    bytes_written = _write (fd, z, to_do);
+    bytes_written = _write (fd, z, (unsigned int)to_do);
     if (bytes_written <= 0) {
       if (errno == EINTR) {
 /* interrupt, retry */
@@ -17580,7 +17580,7 @@ genie_pwd (NODE_T * p)
       diagnostic_node (A68_RUNTIME_ERROR, p, ERROR_OUT_OF_CORE);
       exit_genie (p, A68_RUNTIME_ERROR);
     }
-    if (_getcwd (buffer, size) == buffer) {
+    if (_getcwd (buffer, (int)size) == buffer) {
       cont = A68_FALSE;
     } else {
       free (buffer);
@@ -18045,7 +18045,7 @@ genie_execve (NODE_T * p)
     exit_genie (p, A68_RUNTIME_ERROR);
   }
 #if defined HAVE_WIN32
-  ret = _execve (prog, (const char *const *) argv, (const char *const *) envp);
+  ret = (int)_execve (prog, (const char *const *) argv, (const char *const *) envp);
 #else
   ret = execve (prog, argv, envp);
 #endif
